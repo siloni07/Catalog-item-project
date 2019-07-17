@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="col-2">
+  <header>
+      <div class="row top-menu">
+					<div class="col-md-6">
+						<a href="{{url_for('showCatalogs')}}">
+							<span class="glyphicon glyphicon-home" aria-hidden="true"></span>Show All Catalogs
+						</a>
+					</div>
+					<div class="col-md-6 text-right">
+						{%if 'username' not in session %}
+				<a href="{{url_for('showLogin')}}">Click Here to Login </a>
+				{% else %}
+				<a href="{{url_for('gdisconnect')}}">Logout </a>
+				{% endif %}
+				
+				</div>
+				</div>
+        Catalog MenuApp
+  </header>
+  <main class="content">
+    <article>
+		<h3>List of all Catalogs</h3>
+{% for cat in catalog %}
+<a href="{{url_for('showMenuItem',catalog_id=cat.id)}}">{{ cat.name }}</a><br>
+
+{% endfor %}
+</article>
+</main>
+</div>
+<nav class="col-1">
+<h3>Latest Menu Items</h3>
+
+
+{% for item in catalogitem %}
+<p>{{ item.title }} ( {{ item.catalog.name }})</p>
+{% endfor %}
+</nav>
+{% endblock %}

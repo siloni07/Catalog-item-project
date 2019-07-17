@@ -1,0 +1,58 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div class="col-2">
+<header>
+       
+        <div class="row top-menu">
+                <div class="col-md-6">
+                    <a href="{{url_for('showCatalogs')}}">
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Show All Catalogs
+                    </a>
+                </div>
+                <div class="col-md-6 text-right">
+                    {%if 'username' not in session %}
+            <a href="{{url_for('showLogin')}}">Click Here to Login </a>
+            {% else %}
+            <a href="{{url_for('gdisconnect')}}">Logout </a>
+            {% endif %}
+    
+            </div>
+    </div>
+    Catalog MenuApp
+    
+</header>
+<main class="content">
+        <article>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                
+              {% for message in messages %}
+                 <strong> {{ message }} </strong> 
+              {% endfor %}
+              {% endif %}
+          {% endwith %}
+          <br>
+        <form action="{{url_for('editMenuItem',menu_id= catalogItem.id,catalog_id=catalog.id) }}" method="POST">
+        <h2>Title:</h2>
+        <input type="text" name="title" placeholder="Title" value="{{ catalogItem.title }}" />
+        <h2>Description:</h2>
+        <textarea class="form-control" maxlength="250" rows="3" name="description">{{catalogItem.description}}</textarea>
+        <h2>Category:</h2>  
+        <select name="category" >
+            <option value="Soccer"{% if catalogItem.catalog.name =='Soccer' %} selected=selected {% endif %}>Soccer</option>
+            <option value="Basketball" {% if catalogItem.catalog.name =='Basketball' %} selected=selected {% endif %}>Basketball</option>
+            <option value="Baseball" {% if catalogItem.catalog.name =='Baseball' %} selected=selected {% endif %}>Baseball</option>
+            <option value="Frisbee" {% if catalogItem.catalog.name =='Frisbee' %} selected=selected {% endif %}>Frisbee</option>
+            <option value="Snowboarding" {% if catalogItem.catalog.name =='Snowboarding' %} selected=selected {% endif %}>Snowboarding</option>
+            <option value="Rock Climbing" {% if catalogItem.catalog.name =='Rock Climbing' %} selected=selected {% endif %}>Rock Climbing</option>
+            <option value="Foosball" {% if catalogItem.catalog.name =='Foosball' %} selected=selected {% endif %}>Foosball</option>
+            <option value="Skating" {% if catalogItem.catalog.name =='Skating' %} selected=selected {% endif %}>Skating</option>
+            <option value="Hockey" {% if catalogItem.catalog.name =='Hockey' %} selected=selected {% endif %}>Hockey</option>
+        </select>
+        <button type="submit">Submit</button>
+        </form>
+    </article>
+</main>
+</div>
+{% endblock %}
