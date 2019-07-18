@@ -19,5 +19,5 @@ python catalogrecords.py
 ```
 python project.py
 ```
-* Use Chrome or Firefox to render website (http://localhost:8071/).Once your website is rendered. You can view different sports categories by clicking on sport's name. You need to login using _click here to login_ button on top rightmost corner. Once authenticated using gmail sign-on,one can create,update,delete various sports items.
+* Use Chrome or Firefox to render website (http://localhost:8071/)  .Once your website is rendered. You can view different sports categories by clicking on sport's name. You need to login using _click here to login_ button on top rightmost corner. Once authenticated using gmail sign-on,one can create,update,delete various sports items.
 * All the latest menu items which will be added into the website will start coming under *Latest Menu Items* slab.
