@@ -187,10 +187,9 @@ def showCatalogs():
 #Create new Item in specific catalog
 @app.route('/catalog/<int:catalog_id>/newItem/', methods=['GET', 'POST'])
 def newCatalog(catalog_id):
-
+    if 'username' not in login_session:
+      return redirect('/login')
     catalog = session.query(Catalog).filter_by(id=catalog_id).one()
-    if catalog.user_id != login_session['user_id']:
-        return "<script>function myFunction(){alert('You are not authorized to create Catalog');}</script><body "
     if request.method == 'POST':
         newCatalog = CatalogItem(
             title=request.form['title'],
@@ -210,7 +209,7 @@ def showMenuItem(catalog_id):
     catalogItem = session.query(CatalogItem).filter_by(
         catalog_id=catalog_id).all()
     creator = getUserInfo(catalog.user_id)
-    if 'username' not in login_session or creator.id != login_session['user_id']:
+    if 'username' not in login_session:
         return render_template(
             'publicmenuitem.html',
             catalogItem=catalogItem,
@@ -229,12 +228,10 @@ def showMenuItem(catalog_id):
         'POST'])
 def editMenuItem(menu_id, catalog_id):
     if 'username' not in login_session:
-        return redirect('/catalog')
+      return redirect('/catalog')
     catalog = session.query(Catalog).filter_by(id=catalog_id).one()
     catalogItem = session.query(CatalogItem).filter_by(id=menu_id).one()
-    if catalog.user_id != login_session['user_id']:
-        return "<script>function myFunction(){alert('You are not authorized to edit Catalog');}</script><body "
-
+    
     if request.method == 'POST':
         if request.form['title']:
             catalogItem.title = request.form['title']
@@ -263,12 +260,10 @@ def editMenuItem(menu_id, catalog_id):
         'POST'])
 def deleteMenuItem(menu_id, catalog_id):
     if 'username' not in login_session:
-        return redirect('/catalog')
+      return redirect('/catalog')
     catalog = session.query(Catalog).filter_by(id=catalog_id).one()
     catalogItem = session.query(CatalogItem).filter_by(id=menu_id).one()
-    if catalog.user_id != login_session['user_id']:
-        return "<script>function myFunction(){alert('You are not authorized to delete Catalog');}</script> "
-
+    
     if request.method == 'POST':
         session.delete(catalogItem)
         session.commit()
@@ -319,7 +314,6 @@ def getUserID(email):
 @app.route('/disconnect')
 def disconnect():
     if 'provider' in login_session:
-        gdisconnect()
         del login_session['gplus_id']
         del login_session['access_token']
         del login_session['username']
@@ -330,8 +324,8 @@ def disconnect():
         flash("You have successfully been logged out.")
         return redirect(url_for('showCatalogs'))
     else:
-        flash("You were not logged in")
         return redirect(url_for('showCatalogs'))
+
 
 
 if __name__ == '__main__':

@@ -15,16 +15,15 @@
 						{%if 'username' not in session %}
 				<a href="{{url_for('showLogin')}}">Click Here to Login </a>
 				{% else %}
-				<a href="{{url_for('gdisconnect')}}">Logout </a>
+				<a href="{{url_for('disconnect')}}">Logout </a>
 				{% endif %}
-        
+
 				</div>
         </div>
         Catalog MenuApp
         
   </header>
   <main class="content">
-    
     <article>
 
         {% with messages = get_flashed_messages() %}
@@ -37,11 +36,10 @@
       {% endwith %}
       <br>
       <h3>List of all Catalogs</h3>
-  <table>
+  <table style="width:25%">
 {% for cat in catalog %}
 <tr>
 <td><a href="{{url_for('showMenuItem',catalog_id=cat.id)}}" target="_blank"  >{{ cat.name }}</a></td>
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
 <td><a href="{{url_for('newCatalog',catalog_id=cat.id)}}" >Add Item</a></td>
 </tr>
 {% endfor %}

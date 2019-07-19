@@ -14,7 +14,7 @@
                     {%if 'username' not in session %}
             <a href="{{url_for('showLogin')}}">Click Here to Login </a>
             {% else %}
-            <a href="{{url_for('gdisconnect')}}">Logout </a>
+            <a href="{{url_for('disconnect')}}">Logout </a>
             {% endif %}
     
             </div>
@@ -35,7 +35,7 @@
           <br>
         <form action="{{url_for('editMenuItem',menu_id= catalogItem.id,catalog_id=catalog.id) }}" method="POST">
         <h2>Title:</h2>
-        <input type="text" name="title" placeholder="Title" value="{{ catalogItem.title }}" />
+        <input type="text" name="title" placeholder="Title" value="{{ catalogItem.title }}" size="45" />
         <h2>Description:</h2>
         <textarea class="form-control" maxlength="250" rows="3" name="description">{{catalogItem.description}}</textarea>
         <h2>Category:</h2>  
@@ -50,6 +50,7 @@
             <option value="Skating" {% if catalogItem.catalog.name =='Skating' %} selected=selected {% endif %}>Skating</option>
             <option value="Hockey" {% if catalogItem.catalog.name =='Hockey' %} selected=selected {% endif %}>Hockey</option>
         </select>
+        <br>
         <button type="submit">Submit</button>
         </form>
     </article>

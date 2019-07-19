@@ -14,7 +14,7 @@
                                 {%if 'username' not in session %}
                         <a href="{{url_for('showLogin')}}">Click Here to Login </a>
                         {% else %}
-                        <a href="{{url_for('gdisconnect')}}">Logout </a>
+                        <a href="{{url_for('disconnect')}}">Logout </a>
                         {% endif %}
                 
                         </div>
@@ -30,13 +30,16 @@
               {% endwith %}
           </header>
     <body>
-        <h1>Add Item to {{ catalog.name }}</h1>
+        
+        <h2>Add Item to {{ catalog.name }}</h2>
         <form action="{{url_for('newCatalog',catalog_id=catalog.id)}}" method="post">
         <h3>Title:</h3>
-        <input type="text" name="title" placeholder="Title" />
+        <input type="text" name="title" placeholder="Title" size="45"/>
         <h3>Description:</h3>
-        <input type="text" name="description" placeholder="description" />
+        <input type="text" name="description" placeholder="description" size="45" />
+        <br>
         <button type="submit" id="submit">Create</button>
         </form>
+        
 </body>
 {% endblock %}

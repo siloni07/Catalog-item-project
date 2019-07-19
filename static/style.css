@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box; 
-    width:100%;
   }
   body {
     display: flex;
@@ -27,7 +26,7 @@
   }
   header, footer {
     background: yellowgreen;
-    height: 10vh;
+    height: 15vh;
   }
   header, footer, article, nav {
     padding: 1em;
